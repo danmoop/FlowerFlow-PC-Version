@@ -1,0 +1,39 @@
+	.home-img{
+		margin-top: 80px;
+	}
+
+	.b{
+		font-weight: bold;
+	}
+	
+	.wh{
+		color: white;
+	}
+
+	p{
+		font-size: 20px;
+	}
+
+	.divider{
+		background: white;
+	}
+
+	.margin-btn{
+		transition: 0.35s;
+		padding-right: 50px;
+		padding-left: 50px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin: 0px auto;
+
+	    position: absolute;
+	    bottom: 5%;
+	    transform: translate(-50%, -50%);
+	    left: 50%;
+	}
+
+	.margin-btn:hover{
+		transition: 0.35s;
+		background: #34495e;
+		color: white;
+	}
