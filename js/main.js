@@ -6,5 +6,5 @@ const fs = require('fs');
 const save_path = process.env.HOMEDRIVE + '\\FlowerFlow_Projects';
 
 save_button.addEventListener('click', function(){
-    console.log(save_path);
+    ipc.send('presentation_saved');
 });
