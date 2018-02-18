@@ -76,27 +76,6 @@ ipc.on('mainIsOpened', function()
 		fs.mkdir(save_path);
 	}
 
-
-	/*
-	* I get all the presentations from folder, then they should be displayed in html page
-	*/
-	fs.readdir(save_path, function(err, files) {
-		if (err) {
-			
-		} else {
-		   for(let projectFile of files)
-		   {
-			   fs.readFile(save_path+"\\"+projectFile, function(err, data)
-			   {
-					if(data != null)
-					{
-						console.log(projectFile);
-					}
-				});
-		   }
-		}
-	});
-
 });
 
 
@@ -104,7 +83,7 @@ ipc.on('mainIsOpened', function()
 * This function saves presentation file to presentation folder on HOMEDRIVE
 * File has the same name as the presentation
 */
-ipc.on('presentation_saved', function()
+ipc.on('presentation_saved', function(event)
 {
 	var presentation = new Presentation("title", "desc12312312");
 
@@ -114,6 +93,39 @@ ipc.on('presentation_saved', function()
 		} else {
 			dialog.showMessageBox({ message: "Presentation has been saved to " + save_path,
 			buttons: ["OK"] })
+		}
+	});
+	
+	fs.readdir(save_path, function(err, files) {
+		if (err) {
+			
+		} else {
+			event.sender.send('refreshPage');
+			event.sender.send('displayFiles', files);
+		}
+	});
+});
+
+ipc.on('request_file_list', function(event){
+	/*
+	* I get all the presentations from folder, then they should be displayed in html page
+	*/
+	fs.readdir(save_path, function(err, files) {
+		if (err) {
+			
+		} else {
+			for(let projectFile of files)
+			{
+				fs.readFile(save_path+"\\"+projectFile, function(err, data)
+				{
+					 if(data != null)
+					 {
+						 //event.sender.send('displayFiles', data.toString());
+					 }
+				 });
+			}
+
+			event.sender.send('displayFiles', files);
 		}
 	});
 });
