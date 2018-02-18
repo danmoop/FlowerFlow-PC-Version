@@ -63,3 +63,8 @@
 	.button{
 		padding: 15px;
 	}
+
+	.help-box{
+		border: 2px solid #34495e;
+		margin: 20px;
+	}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Help</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/flat-ui.css">
+    <link rel="stylesheet" href="../css/appstyle.css">
+</head>
+<body>
+    
+    <div id="output" class="text-center">
+
+    </div>
+
+    <script>
+        let output = `
+            <p class="help-box">Your project folder: <strong>${process.env.HOMEDRIVE}\\FlowerFlow_Projects</strong></p>
+            <p class="help-box">FlowerFlow version: <strong>${require('electron').remote.app.getVersion()}</strong></p>
+        `;
+
+        document.getElementById('output').innerHTML = output;
+
+    </script>
+
+</body>
+</html>
