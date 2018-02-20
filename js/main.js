@@ -1,13 +1,8 @@
 const BrowserWindow = require('electron').remote.BrowserWindow;
 const newWindowBtn = document.getElementById('getstartedbtn')
 const ipc = require('electron').ipcRenderer;
-const save_button = document.getElementById('presentationsave');
 const fs = require('fs');
 const save_path = process.env.HOMEDRIVE + '\\FlowerFlow_Projects';
-
-save_button.addEventListener('click', function(){
-    ipc.send('presentation_saved');
-});
 
 window.onload = function()
 {
@@ -24,8 +19,8 @@ ipc.on('displayFiles', function(event, data){
 	for(let projectFile of data)
 	{
 		fs.readFile(save_path+"\\"+projectFile, function(err, data)
-		{
-			 if(data != null)
+		{			
+			if(data != null)
 			 {
                  let presentation_Object = JSON.parse(data.toString());
                  
@@ -33,4 +28,8 @@ ipc.on('displayFiles', function(event, data){
 			 }
 		 });
 	}
+});
+
+document.getElementById('createProjectBtn').addEventListener('click', function(){
+	ipc.send('openEditor');
 });

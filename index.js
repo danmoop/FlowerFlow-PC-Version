@@ -26,7 +26,10 @@ ipc.on('mainIsOpened', function()
 			submenu:
 			[
 				{
-					label: 'New Project'
+					label: 'New Project',
+					click() {
+						openEditor();
+					}
 				},
 				{
 					label: 'Open Project'
@@ -38,10 +41,10 @@ ipc.on('mainIsOpened', function()
 			submenu:
 			[
 				{
-					label: 'Increase View'
-				},
-				{
-					label: 'Decrease View'
+					label: 'Open home page',
+					click(){
+					mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
+					}
 				}
 			]
 		},
@@ -77,6 +80,17 @@ ipc.on('mainIsOpened', function()
 	}
 
 });
+
+ipc.on('openEditor', function(){
+	openEditor();	  
+});
+
+
+function openEditor()
+{
+	mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
+	//mainWindow.toggleDevTools();
+}
 
 
 /*
