@@ -31,5 +31,5 @@ ipc.on('displayFiles', function(event, data){
 });
 
 document.getElementById('createProjectBtn').addEventListener('click', function(){
-	ipc.send('openEditor');
+	ipc.send('openEditorSettings');
 });

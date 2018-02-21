@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/flat-ui.css">
+    <link rel="stylesheet" href="../css/appstyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container text-center">
+        <h2>Project settings</h2>
+        <hr>
+        <div class="form-group has-error" style="margin: 20px;">
+            <input id="p_title" class="form-control" type="text" placeholder="Presentation title" />
+        </div>
+        <div class="form-group has-success" style="margin: 20px;">
+            <input id="p_description" class="form-control" type="text" placeholder="Presentation description" />
+        </div>
+		<button type="button" id="createPresentation" class="btn b margin-btn">Create</button>
+    </div>
+
+    <script>
+        require("../js/editorSettings.js");
+    </script>
+
+</body>
+</html>

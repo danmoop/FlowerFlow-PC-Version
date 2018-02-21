@@ -27,12 +27,20 @@ ipc.on('mainIsOpened', function()
 			[
 				{
 					label: 'New Project',
-					click() {
-						openEditor();
+					click()
+					 {
+						mainWindow.loadURL('file://' + __dirname + '/sections/presentationSettings.html');
 					}
 				},
 				{
 					label: 'Open Project'
+				},
+				{
+					label: 'Exit',
+					click()
+					{
+						app.exit();
+					}
 				}
 			]
 		},
@@ -42,8 +50,9 @@ ipc.on('mainIsOpened', function()
 			[
 				{
 					label: 'Open home page',
-					click(){
-					mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
+					click()
+					{
+						mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
 					}
 				}
 			]
@@ -81,26 +90,27 @@ ipc.on('mainIsOpened', function()
 
 });
 
-ipc.on('openEditor', function(){
-	openEditor();	  
+ipc.on('openEditorSettings', function(){
+	mainWindow.loadURL('file://' + __dirname + '/sections/presentationSettings.html');
+	//mainWindow.toggleDevTools();  
 });
 
+ipc.on('openEditor', function(event, data){
+	mainWindow.presentationObject = {
+		title: data.title,
+		description: data.description
+	}
 
-function openEditor()
-{
 	mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
 	//mainWindow.toggleDevTools();
-}
-
+});
 
 /*
 * This function saves presentation file to presentation folder on HOMEDRIVE
 * File has the same name as the presentation
 */
-ipc.on('presentation_saved', function(event)
+ipc.on('presentation_saved', function(event, presentation)
 {
-	var presentation = new Presentation("title", "desc12312312");
-
 	fs.writeFile(save_path+"/"+presentation.title+".flower", JSON.stringify(presentation), function(err) {
 		if(err) {
 			console.log(err);
