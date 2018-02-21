@@ -77,7 +77,7 @@ ipc.on('mainIsOpened', function()
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
 	mainWindow.setMenu(Menu.buildFromTemplate(template));
-	//mainWindow.toggleDevTools();
+	mainWindow.toggleDevTools();
 
 	/*
 	* If I start application for the first time, 
@@ -128,6 +128,10 @@ ipc.on('presentation_saved', function(event, presentation)
 			event.sender.send('displayFiles', files);
 		}
 	});
+});
+
+ipc.on('presentation_deleted', function(event, presentation){
+
 });
 
 ipc.on('request_file_list', function(event){
