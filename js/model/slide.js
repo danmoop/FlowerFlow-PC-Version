@@ -14,6 +14,16 @@ class Slide
     {
         this.text = text;
     }
+
+    getNumber()
+    {
+        return this.number;
+    }
+
+    setNumber(number)
+    {
+        this.number = number;
+    }
 }
 
 module.exports = Slide;

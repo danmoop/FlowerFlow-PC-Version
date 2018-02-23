@@ -76,4 +76,26 @@
 		margin-top: 10px;
 		width: 100%;
 		margin: 5px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	div.scrollmenu {
+		overflow: auto;
+		white-space: nowrap;
+	}
+	
+	div.scrollmenu a {
+		display: inline-block;
+		color: black;
+		text-align: center;
+		padding: 14px;
+		text-decoration: none;
+		border: 2px solid #333;
+	}
+	
+	div.scrollmenu a:hover {
+		background-color: #3a3a3a;
+		color: white;
 	}

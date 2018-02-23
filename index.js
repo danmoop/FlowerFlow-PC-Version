@@ -13,7 +13,7 @@ const dialog = require('electron').dialog;
 let mainWindow = null;
 
 app.on('ready', function(){
-	mainWindow = new BrowserWindow({width: 1280, height: 768, minHeight: 600, minWidth: 600});
+	mainWindow = new BrowserWindow({width: 1280, height: 768, minHeight: 768, minWidth: 1280});
 	mainWindow.loadURL('file://' + __dirname + '/index.html');
 	mainWindow.setMenu(null);
 });
@@ -77,7 +77,7 @@ ipc.on('mainIsOpened', function()
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
 	mainWindow.setMenu(Menu.buildFromTemplate(template));
-	mainWindow.toggleDevTools();
+	//mainWindow.toggleDevTools();
 
 	/*
 	* If I start application for the first time, 
@@ -96,10 +96,7 @@ ipc.on('openEditorSettings', function(){
 });
 
 ipc.on('openEditor', function(event, data){
-	mainWindow.presentationObject = {
-		title: data.title,
-		description: data.description
-	}
+	mainWindow.presentationObject = new Presentation(data.title, data.description, []);
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
 	//mainWindow.toggleDevTools();
@@ -115,8 +112,6 @@ ipc.on('presentation_saved', function(event, presentation)
 		if(err) {
 			console.log(err);
 		} else {
-			dialog.showMessageBox({ message: "Presentation has been saved to " + save_path,
-			buttons: ["OK"] })
 		}
 	});
 	
@@ -130,10 +125,6 @@ ipc.on('presentation_saved', function(event, presentation)
 	});
 });
 
-ipc.on('presentation_deleted', function(event, presentation){
-
-});
-
 ipc.on('request_file_list', function(event){
 	/*
 	* I get all the presentations from folder, then they should be displayed in html page
@@ -141,7 +132,8 @@ ipc.on('request_file_list', function(event){
 	fs.readdir(save_path, function(err, files) {
 		if (err) {
 			
-		} else {
+		} else 
+		{
 			for(let projectFile of files)
 			{
 				fs.readFile(save_path+"\\"+projectFile, function(err, data)
@@ -150,10 +142,31 @@ ipc.on('request_file_list', function(event){
 					 {
 						 //event.sender.send('displayFiles', data.toString());
 					 }
-				 });
+				});
 			}
-
+			mainWindow.allProjects = files;
 			event.sender.send('displayFiles', files);
 		}
 	});
+});
+
+ipc.on('openProject', function(event, button){
+
+	for(let project of mainWindow.allProjects)
+	{
+		if(button.id.split("_")[1] == project.split(".")[0])
+		{
+			fs.readFile(save_path+"\\"+project, function(err, data)
+			{
+				if(data != null)
+				{
+					mainWindow.presentationObject = new Presentation(button.id.split("_")[1], JSON.parse(data.toString()).description, []);
+					mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
+				}
+
+			});
+
+		}
+	}
+
 });
