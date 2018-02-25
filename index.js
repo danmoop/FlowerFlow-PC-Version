@@ -77,7 +77,7 @@ ipc.on('mainIsOpened', function()
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
 	mainWindow.setMenu(Menu.buildFromTemplate(template));
-	//mainWindow.toggleDevTools();
+	mainWindow.toggleDevTools();
 
 	/*
 	* If I start application for the first time, 
