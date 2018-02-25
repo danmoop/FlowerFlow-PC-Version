@@ -22,6 +22,8 @@ window.onload = function()
     document.getElementById('addSlide_Btn').addEventListener('click', function(){
         console.log('slide added');
     });
+
+    createEditor();
 }
 
 function createEditor()

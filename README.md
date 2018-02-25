@@ -7,3 +7,5 @@ I want to create an app for creating presenations (like power point by Microsoft
 
 ![preview](gallery/startscreen.png)
 ![preview](gallery/projectscreen.png)
+![preview](gallery/editorsettings.png)
+![preview](gallery/editor.png)
