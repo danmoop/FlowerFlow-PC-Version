@@ -1,35 +1,10 @@
 class Presentation
 {
-    constructor(title, description)
+    constructor(title, description, slides)
     {
         this.title = title;
         this.description = description;
-        this.slides = [];
-    }
-
-    getTitle()
-    {
-        return this.title;
-    }
-
-    getDescription()
-    {
-        return this.description;
-    }
-
-    getSlides()
-    {
-        return this.slides;
-    }
-
-    setTitle(title)
-    {
-        this.title = title;
-    }
-
-    setDescription(description)
-    {
-        this.description = description;
+        this.slides = slides;
     }
 
     addSlide(slide)

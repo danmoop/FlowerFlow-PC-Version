@@ -1,6 +1,8 @@
 const ipc = require('electron').ipcRenderer;
 const remote = require('electron').remote;
 const Slide = require('./model/slide');
+const fs = require('fs');
+const save_path = process.env.HOMEDRIVE + '\\FlowerFlow_Projects';
 
 var presentationObject;
 
@@ -11,19 +13,46 @@ window.onload = function()
 
     ipc.send('presentation_saved', presentationObject);
 
-    /*
-    Editor html:
-
-    <div id="editor">
-        <p>Welcome to editor!</p>
-    </div>
-
-    */
     document.getElementById('addSlide_Btn').addEventListener('click', function(){
-        console.log('slide added');
+        addNewSlide(presentationObject);
     });
 
-    createEditor();
+    console.log(presentationObject);
+
+    if(presentationObject.slides.length == 0)
+    {
+        document.getElementById('slides').innerHTML = "<p>No slides created yet</p>";
+    }
+
+    else
+    {
+        for(var i = 0; i < presentationObject.slides.length; i++)
+        {
+            document.getElementById('slides').innerHTML = document.getElementById('slides').innerHTML + presentationObject.slides[i].name;
+        }
+    }
+}
+
+function addNewSlide(project)
+{
+    let slide = new Slide("My second slide");
+    project.addSlide(slide);
+    console.log(project);
+    
+    saveChanges(project);
+}
+
+function saveChanges(project)
+{
+    fs.writeFile(save_path+"/"+project.title+".flower", JSON.stringify(project), function(err) 
+    {
+		if(err) {
+			console.log(err);
+		} else {
+            console.log('Saved successfully');
+            location.reload();
+		}
+	});
 }
 
 function createEditor()

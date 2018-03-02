@@ -95,12 +95,15 @@ ipc.on('openEditorSettings', function(){
 	//mainWindow.toggleDevTools();  
 });
 
-ipc.on('openEditor', function(event, data){
+/* This function executes only when you created project using form
+   This isn't executed if you open project created earlier
+*/ 
+/*ipc.on('openEditor', function(event, data){
 	mainWindow.presentationObject = new Presentation(data.title, data.description, []);
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
 	//mainWindow.toggleDevTools();
-});
+});*/
 
 /*
 * This function saves presentation file to presentation folder on HOMEDRIVE
@@ -111,7 +114,6 @@ ipc.on('presentation_saved', function(event, presentation)
 	fs.writeFile(save_path+"/"+presentation.title+".flower", JSON.stringify(presentation), function(err) {
 		if(err) {
 			console.log(err);
-		} else {
 		}
 	});
 	
@@ -160,7 +162,9 @@ ipc.on('openProject', function(event, button){
 			{
 				if(data != null)
 				{
-					mainWindow.presentationObject = new Presentation(button.id.split("_")[1], JSON.parse(data.toString()).description, []);
+					let prProject = JSON.parse(data.toString());
+
+					mainWindow.presentationObject = new Presentation(prProject.title, prProject.description, prProject.slides);
 					mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
 				}
 

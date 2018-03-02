@@ -1,28 +1,8 @@
 class Slide
 {
-    constructor(text)
+    constructor(name)
     {
-        this.text = text;
-    }
-
-    getText()
-    {
-        return this.text;
-    }
-
-    setText(text)
-    {
-        this.text = text;
-    }
-
-    getNumber()
-    {
-        return this.number;
-    }
-
-    setNumber(number)
-    {
-        this.number = number;
+        this.name = name;
     }
 }
 
