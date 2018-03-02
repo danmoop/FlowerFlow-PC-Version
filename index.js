@@ -98,12 +98,14 @@ ipc.on('openEditorSettings', function(){
 /* This function executes only when you created project using form
    This isn't executed if you open project created earlier
 */ 
-/*ipc.on('openEditor', function(event, data){
+ipc.on('openEditor', function(event, data){
+	// Title and description are taken from input form
+	// Slides array is empty by default
 	mainWindow.presentationObject = new Presentation(data.title, data.description, []);
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
 	//mainWindow.toggleDevTools();
-});*/
+});
 
 /*
 * This function saves presentation file to presentation folder on HOMEDRIVE
