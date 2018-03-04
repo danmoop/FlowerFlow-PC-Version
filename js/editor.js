@@ -28,18 +28,24 @@ window.onload = function()
     {
         for(var i = 0; i < presentationObject.slides.length; i++)
         {
-            document.getElementById('slides').innerHTML = document.getElementById('slides').innerHTML + presentationObject.slides[i].name;
+            document.getElementById('slides').innerHTML = document.getElementById('slides').innerHTML + "<button class='btn btn-inverse slidebtn'>"+presentationObject.slides[i].name+"</button>";
         }
     }
 }
 
+ipc.on('saveSlideToProject', function(event, slideInfo){
+    let slide = new Slide(slideInfo.name);
+
+    presentationObject.addSlide(slide);
+
+    console.log(presentationObject);
+    
+    saveChanges(presentationObject);
+});
+
 function addNewSlide(project)
 {
-    let slide = new Slide("My second slide");
-    project.addSlide(slide);
-    console.log(project);
-    
-    saveChanges(project);
+    ipc.send('openSlideSettings');
 }
 
 function saveChanges(project)

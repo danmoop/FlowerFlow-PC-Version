@@ -77,7 +77,7 @@ ipc.on('mainIsOpened', function()
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
 	mainWindow.setMenu(Menu.buildFromTemplate(template));
-	mainWindow.toggleDevTools();
+	//mainWindow.toggleDevTools();
 
 	/*
 	* If I start application for the first time, 
@@ -98,12 +98,14 @@ ipc.on('openEditorSettings', function(){
 /* This function executes only when you created project using form
    This isn't executed if you open project created earlier
 */ 
-/*ipc.on('openEditor', function(event, data){
+ipc.on('openEditor', function(event, data){
+	// Title and description are taken from input form
+	// Slides array is empty by default
 	mainWindow.presentationObject = new Presentation(data.title, data.description, []);
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/editor.html');
 	//mainWindow.toggleDevTools();
-});*/
+});
 
 /*
 * This function saves presentation file to presentation folder on HOMEDRIVE
@@ -173,4 +175,16 @@ ipc.on('openProject', function(event, button){
 		}
 	}
 
+});
+
+ipc.on('openSlideSettings', function(event){
+	slideSettings = new BrowserWindow({width: 900, height: 600, resizable: false});
+	slideSettings.loadURL('file://' + __dirname + '/sections/slideSettings.html');
+	slideSettings.setMenu(null);
+});
+
+ipc.on('createSlide', function(event, slideInfo){
+	mainWindow.webContents.send('saveSlideToProject', slideInfo);
+
+	slideSettings.close();
 });

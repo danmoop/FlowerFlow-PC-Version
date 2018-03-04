@@ -81,6 +81,23 @@
 		text-overflow: ellipsis;
 	}
 
+	.slidebtn{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	.project-box-inverse{
+		background: transparent;
+		border: 2px solid #34495E;
+		font-size: 20px;
+		margin-top: 10px;
+		margin: 5px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+
 	div.scrollmenu {
 		overflow: auto;
 		white-space: nowrap;

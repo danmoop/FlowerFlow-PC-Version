@@ -20,10 +20,10 @@
   },
   "name": "FlowerFlow",
   "version": "0.16.0",
-   "build": {
-   "appId": "your.id",
-   "mac": {
-     "category": "your.app.category.type"
-   }
- }
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  }
 }
