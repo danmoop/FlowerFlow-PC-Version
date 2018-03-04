@@ -176,6 +176,7 @@ ipc.on('openProject', function(event, button){
 	}
 
 });
+<<<<<<< HEAD
 
 ipc.on('openSlideSettings', function(event){
 	slideSettings = new BrowserWindow({width: 900, height: 600, resizable: false});
@@ -188,3 +189,5 @@ ipc.on('createSlide', function(event, slideInfo){
 
 	slideSettings.close();
 });
+=======
+>>>>>>> origin/master
