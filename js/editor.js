@@ -10,6 +10,7 @@ window.onload = function()
 {
     presentationObject = require('electron').remote.getCurrentWindow().presentationObject;
     document.getElementById('p_title').innerHTML = presentationObject.title;
+    document.getElementById('p_desc').innerHTML = presentationObject.description;
 
     ipc.send('presentation_saved', presentationObject);
 
@@ -28,9 +29,23 @@ window.onload = function()
     {
         for(var i = 0; i < presentationObject.slides.length; i++)
         {
-            document.getElementById('slides').innerHTML = document.getElementById('slides').innerHTML + "<button class='btn btn-inverse slidebtn'>"+presentationObject.slides[i].name+"</button>";
+            document.getElementById('slides').innerHTML = document.getElementById('slides').innerHTML + "<button class='btn btn-inverse slidebtn' id='"+presentationObject.slides[i].name+"'>"+presentationObject.slides[i].name+"</button>";
         }
     }
+
+    document.querySelector('#slides').addEventListener('click', function(e){
+		
+		var project_btn = e.target;
+
+        for(var i = 0; i < presentationObject.slides.length; i++)
+        {
+            if(e.target.id == presentationObject.slides[i].name)
+            {
+                ipc.send('openSlideEditor', presentationObject.slides[i]);
+            }
+        }
+
+	});
 }
 
 ipc.on('saveSlideToProject', function(event, slideInfo){
@@ -59,30 +74,4 @@ function saveChanges(project)
             location.reload();
 		}
 	});
-}
-
-function createEditor()
-{
-         
-    var toolbarOptions = [
-        ['bold', 'italic', 'underline', 'strike'],        
-        ['blockquote', 'code-block'],
-        [{ 'header': 1 }, { 'header': 2 }],             
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],     
-        [{ 'indent': '-1'}, { 'indent': '+1' }],        
-        [{ 'direction': 'rtl' }],                         
-        [{ 'size': ['small', false, 'large', 'huge'] }],  
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],          
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        ['clean']
-    ];
-    var quill = new Quill('#editor', {
-        modules: {
-        toolbar: toolbarOptions
-        },
-        theme: 'snow'
-    });
 }
