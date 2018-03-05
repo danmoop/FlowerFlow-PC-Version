@@ -177,14 +177,11 @@ ipc.on('openProject', function(event, button){
 
 });
 
-<<<<<<< HEAD
 ipc.on('openSlideEditor', function(event, slide){
 	mainWindow.slideObject = slide;
 	mainWindow.loadURL('file://' + __dirname + '/sections/slideEditor.html');
 });
 
-=======
->>>>>>> origin/master
 
 ipc.on('openSlideSettings', function(event){
 	slideSettings = new BrowserWindow({width: 900, height: 600, resizable: false});
@@ -195,8 +192,4 @@ ipc.on('createSlide', function(event, slideInfo){
 	mainWindow.webContents.send('saveSlideToProject', slideInfo);
 
 	slideSettings.close();
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> origin/master
