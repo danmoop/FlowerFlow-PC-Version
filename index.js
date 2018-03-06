@@ -182,6 +182,7 @@ ipc.on('openSlideEditor', function(event, slide){
 	mainWindow.loadURL('file://' + __dirname + '/sections/slideEditor.html');
 });
 
+
 ipc.on('openSlideSettings', function(event){
 	slideSettings = new BrowserWindow({width: 900, height: 600, resizable: false});
 	slideSettings.loadURL('file://' + __dirname + '/sections/slideSettings.html');
