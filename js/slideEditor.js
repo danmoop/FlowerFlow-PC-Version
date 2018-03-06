@@ -2,6 +2,7 @@ const remote = require('electron').remote;
 const dialog = require('electron').remote.dialog;
 const fs = require('fs');
 const save_path = process.env.HOMEDRIVE + '\\FlowerFlow_Projects';
+const ipc = require('electron').ipcRenderer;
 
 let slideObject;
 let project;
@@ -26,7 +27,8 @@ window.onload = function()
 
     document.getElementById('editor').nodeValue = "Hello world";
 
-    document.getElementById('slideSaveChanges').addEventListener('click', function(){
+    document.getElementById('slideSaveChanges').addEventListener('click', function()
+    {
         
         slideContent = quill.container.firstChild.innerHTML;
 
@@ -40,6 +42,10 @@ window.onload = function()
         }
 
         save();      
+    });
+
+    document.getElementById('previewBtn').addEventListener('click', function(){
+        ipc.send('openPreviewWindow', project.slides);
     });
 }
 

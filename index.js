@@ -77,7 +77,7 @@ ipc.on('mainIsOpened', function()
 
 	mainWindow.loadURL('file://' + __dirname + '/sections/main.html');
 	mainWindow.setMenu(Menu.buildFromTemplate(template));
-	mainWindow.toggleDevTools();
+	//mainWindow.toggleDevTools();
 
 	/*
 	* If I start application for the first time, 
@@ -177,26 +177,28 @@ ipc.on('openProject', function(event, button){
 
 });
 
-<<<<<<< HEAD
 ipc.on('openSlideEditor', function(event, slide){
 	mainWindow.slideObject = slide;
 	mainWindow.loadURL('file://' + __dirname + '/sections/slideEditor.html');
 });
-
-=======
->>>>>>> origin/master
 
 ipc.on('openSlideSettings', function(event){
 	slideSettings = new BrowserWindow({width: 900, height: 600, resizable: false});
 	slideSettings.loadURL('file://' + __dirname + '/sections/slideSettings.html');
 	slideSettings.setMenu(null);
 });
+
 ipc.on('createSlide', function(event, slideInfo){
 	mainWindow.webContents.send('saveSlideToProject', slideInfo);
 
 	slideSettings.close();
-<<<<<<< HEAD
 });
-=======
+
+ipc.on('openPreviewWindow', function(event, slides){
+	console.log(slides);
+	let previewWindow = new BrowserWindow({width: 900, height: 600, fullscreen: true, resizable: false});
+	previewWindow.loadURL('file://' + __dirname + '/sections/previewWindow.html');
+	previewWindow.setMenu(null);
+	previewWindow.slides = slides;
+	//previewWindow.toggleDevTools();
 });
->>>>>>> origin/master

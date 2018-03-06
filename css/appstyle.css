@@ -1,11 +1,20 @@
 	body{
 		user-select: none;
 		overflow-x: hidden;
-		overflow-y: hidden;
 	}
 
 	.home-img{
 		margin-top: 80px;
+	}
+
+	.margin-top-50
+	{
+		margin-top: 50px;
+	}
+
+	.margin-bottom-20
+	{
+		margin-bottom: 20px;
 	}
 
 	.b{
@@ -115,4 +124,11 @@
 	div.scrollmenu a:hover {
 		background-color: #3a3a3a;
 		color: white;
+	}
+
+	.margin-bottom{
+		position: absolute;
+		bottom: 2%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
